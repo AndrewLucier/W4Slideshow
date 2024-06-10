@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 4 Places I'd Like to Visit Slideshow</title>
+    <style>
+        #imgPicture{
+            width: 400px;
+            margin: 20px;
+        }
+        a{
+            text-decoration: none;
+            color: maroon;
+        }
+        a:hover{
+            text-decoration: underline
+        }
+        .centered{
+            text-align: center
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to my slideshow. Use the arrows to advance the slides.</h1>
+    </header>
+    <div class="centered">
+        <img src="beach.jpg" id="imgPicture" alt="Slideshow">
+
+        <br>
+        <a id="aPrevLink" href="#">&lt;&lt; Previous</a>
+        <a id="aNextLink" href="#">Next &gt;&gt;</a>
+    </div>
+
+    <!-- JavaScript to get the slideshow working -->
+    <script>
+        // add an event listener that runs after the DOM is fully loaded; then a function will fire
+        document.addEventListener("DOMContentLoaded", initLinks);
+
+        // set up an array with the image locations - these will be used in the src attribute for the image
+        var arrPictures = ["beach.jpg", "vegas.jpg", "japan.jpg", "uk.jpeg"];
+
+        // variable to keep track of our current image
+        var thePic = 0;
+
+        // function to st up the event listeners for our navigation links for the slideshow
+        function initLinks(){
+            // add an event listener to the Previous link to call a function when the link is clicked
+            document.getElementById("aPrevLink").addEventListener("click", processPrevious);
+            // add an event listener to the Next link to call a function when the link is clicked
+            document.getElementById("aNextLink").addEventListener("click", processNext);
+        }
+
+        // function will handle the "Previous" link click event
+        function processPrevious(event){
+            // prevent the default action of the link which would be navigation to #
+            event.preventDefault();
+
+            // we are already at the beginning of the slideshow
+            if (thePic == 0){
+                // the flow of the slideshow is up to you - just keep the counter at 0 or you could go to the last image - arrPictures.length - 1
+            }
+            else{
+                thePic = thePic - 1;
+            }
+
+            // update the image source for whatever picture we should show
+            document.getElementById("imgPicture").src = arrPictures[thePic];
+        }
+
+        // function will handle the "Next" link click event
+        function processNext(event){
+            // prevent the default action of the link which would be navigation to #
+            event.preventDefault();
+            
+            // watch the console for array out of bounds exception
+
+            if (thePic == arrPictures.length - 1){
+                // the flow of the slideshow is up to you - either keep the current image, or go back to the beginning
+                // set thePic = 0 or do nothing
+            }
+            else{
+                thePic = thePic + 1;
+            }
+            
+
+            // update the image source for whatever picture we should show
+            document.getElementById("imgPicture").src = arrPictures[thePic];
+        }
+    </script>
+</body>
+</html>
